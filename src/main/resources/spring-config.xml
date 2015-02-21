@@ -4,9 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <alias name="HelloService" alias="helloServiceAlias"/>
+    <alias name="helloService" alias="helloServiceAlias1"/>
+    <alias name="helloService" alias="helloServiceAlias2"/>
 
-    <bean id="HelloService" class="org.diosoft.spring.HelloService" />
+    <bean id="helloService" class="org.diosoft.spring.HelloService" />
 
     <bean id="myBeanFactory" class="org.diosoft.spring.MyBeanFactory"/>
 
