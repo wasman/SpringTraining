@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <alias name="HelloService" alias="helloServiceAlias"/>
+
+    <bean id="HelloService" class="org.diosoft.spring.HelloService" />
+
+    <bean id="myBeanFactory" class="org.diosoft.spring.MyBeanFactory"/>
+
+    <bean id="myBean"
+          class="org.diosoft.spring.MyBeanFactory" factory-method="createMyBean"/>
+
+    <bean id="myBeanInstance" class="org.diosoft.spring.MyBean"
+          factory-bean="myBeanFactory" factory-method="createMyBeanInstance" />
+
+</beans>
