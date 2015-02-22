@@ -5,6 +5,9 @@
       <configuration>
         <fileset id="fileset1" name="XML Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/beanRefFactory.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/beanRefFactoryAlias.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/beanRefContext.xml</file>
         </fileset>
       </configuration>
     </facet>

@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <alias name="helloService" alias="helloServiceAlias1"/>
     <alias name="helloService" alias="helloServiceAlias2"/>
 
-    <bean id="helloService" class="org.diosoft.spring.HelloService" />
+    <bean id="helloService" class="org.diosoft.spring.HelloService" >
+        <constructor-arg>
+            <util:set>
+                <value>First</value>
+                <value>Second</value>
+                <value>Third</value>
+            </util:set>
+        </constructor-arg>
+    </bean>
 
     <bean id="myBeanFactory" class="org.diosoft.spring.MyBeanFactory"/>
 
@@ -15,6 +25,6 @@
           class="org.diosoft.spring.MyBeanFactory" factory-method="createMyBean"/>
 
     <bean id="myBeanInstance" class="org.diosoft.spring.MyBean"
-          factory-bean="myBeanFactory" factory-method="createMyBeanInstance" />
+          factory-bean="myBeanFactory" factory-method="createMyBeanInstance"/>
 
 </beans>
