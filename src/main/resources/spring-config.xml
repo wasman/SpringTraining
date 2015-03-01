@@ -9,7 +9,51 @@
     <alias name="helloService" alias="helloServiceAlias1"/>
     <alias name="helloService" alias="helloServiceAlias2"/>
 
-    <bean id="helloService" class="org.diosoft.spring.HelloService" >
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="spring-training.properties"/>
+    </bean>
+
+    <bean id="listener" class="org.diosoft.spring.forscan.SimpleApplicationListener"/>
+
+    <bean id="myBeanForProperties" class="org.diosoft.spring.MyBean">
+        <constructor-arg value="${prop.value1}"/>
+        <constructor-arg value="${prop.value2}"/>
+    </bean>
+
+    <util:map id="mapInSpringContext"
+              key-type="java.lang.String"
+              value-type="java.lang.String"
+              map-class="java.util.HashMap"
+              scope="prototype"
+            >
+        <entry key="1st" value="First"/>
+        <entry key="2st" value="Second"/>
+        <entry key="3st" value="Third"/>
+    </util:map>
+
+    <!-- target bean to be referenced by name -->
+    <bean id="testBean" class="org.diosoft.spring.TestBean" scope="prototype">
+        <property name="age" value="10"/>
+        <property name="spouse">
+            <bean class="org.diosoft.spring.TestBean">
+                <property name="age" value="11"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- will result in 10, which is the value of property age of bean testBean -->
+    <util:property-path id="name" path="testBean.age"/>
+
+    <util:properties id="propForHelloService">
+        <prop key="admin">admin@example.org</prop>
+        <prop key="support">support@example.org</prop>
+        <prop key="development">development@example.org</prop>
+    </util:properties>
+
+    <util:constant id="myConstant"
+                   static-field="org.diosoft.spring.HelloService.SERVICE_NAME"/>
+
+    <bean id="helloService" class="org.diosoft.spring.HelloService">
         <constructor-arg>
             <util:set>
                 <value>First</value>
@@ -17,6 +61,14 @@
                 <value>Third</value>
             </util:set>
         </constructor-arg>
+
+        <property name="prop">
+            <props>
+                <prop key="admin">admin@example.org</prop>
+                <prop key="support">support@example.org</prop>
+                <prop key="development">development@example.org</prop>
+            </props>
+        </property>
     </bean>
 
     <bean id="myBeanFactory" class="org.diosoft.spring.MyBeanFactory"/>

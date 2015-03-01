@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+    <!--<jee:jndi-lookup id="dataSource" jndi-name="jdbc/MyDataSource"/>-->
+
+    <!--<bean id="userDao" class="org.diosoft.spring.jndi.JdbcUserDao">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--<jee:jndi-lookup id="simpleOne" jndi-name="jdbc/MyDataSource">-->
+        <!--<jee:environment>foo=bar</jee:environment>-->
+    <!--</jee:jndi-lookup>-->
+
+    <!--<jee:jndi-lookup id="simpleMultiple" jndi-name="jdbc/MyDataSource">-->
+        <!--<jee:environment>-->
+            <!--foo=bar-->
+            <!--ping=pong-->
+        <!--</jee:environment>-->
+    <!--</jee:jndi-lookup>-->
+
+    <!--<jee:jndi-lookup id="simple"-->
+                     <!--jndi-name="jdbc/MyDataSource"-->
+                     <!--cache="true"-->
+                     <!--resource-ref="true"-->
+                     <!--lookup-on-startup="false"-->
+                     <!--expected-type="org.diosoft.spring.jndi.DefaultFoo"-->
+                     <!--proxy-interface="org.diosoft.spring.jndi.Foo"/>-->
+
+    <!--<jee:local-slsb id="simpleSlsb" jndi-name="ejb/RentalServiceBean"-->
+                    <!--business-interface="org.diosoft.spring.jndi.RentalService"/>-->
+
+    <!--<jee:local-slsb id="complexLocalEjb"-->
+                    <!--jndi-name="ejb/RentalServiceBean"-->
+                    <!--business-interface="org.diosoft.spring.jndi.RentalService"-->
+                    <!--cache-home="true"-->
+                    <!--lookup-home-on-startup="true"-->
+                    <!--resource-ref="true"/>-->
+
+    <!--<jee:remote-slsb id="complexRemoteEjb"-->
+                     <!--jndi-name="ejb/MyRemoteBean"-->
+                     <!--business-interface="org.diosoft.spring.jndi.RentalService"-->
+                     <!--cache-home="true"-->
+                     <!--lookup-home-on-startup="true"-->
+                     <!--resource-ref="true"-->
+                     <!--home-interface="org.diosoft.spring.jndi.RentalService"-->
+                     <!--refresh-home-on-connect-failure="true"/>-->
+
+    <!--<bean id="simpleOldStyle" class="org.springframework.jndi.JndiObjectFactoryBean">-->
+        <!--<property name="jndiName" value="jdbc/MyDataSource"/>-->
+        <!--<property name="cache" value="true"/>-->
+        <!--<property name="resourceRef" value="true"/>-->
+        <!--<property name="lookupOnStartup" value="false"/>-->
+        <!--<property name="expectedType" value="com.myapp.DefaultFoo"/>-->
+        <!--<property name="proxyInterface" value="com.myapp.Foo"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="complexOldStyleRemoteEjb"-->
+          <!--class="org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBean">-->
+        <!--<property name="jndiName" value="ejb/MyRemoteBean"/>-->
+        <!--<property name="businessInterface" value="com.foo.service.RentalService"/>-->
+        <!--<property name="cacheHome" value="true"/>-->
+        <!--<property name="lookupHomeOnStartup" value="true"/>-->
+        <!--<property name="resourceRef" value="true"/>-->
+        <!--<property name="homeInterface" value="com.foo.service.RentalService"/>-->
+        <!--<property name="refreshHomeOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <bean id="myBean" class="org.diosoft.spring.jndi.MyBean">
+        <constructor-arg value="super 8"/>
+    </bean>
+
+    <!--for test-->
+    <bean id="jndiBinder" class="org.springframework.mock.jndi.SimpleNamingContextBuilder"
+          factory-method="emptyActivatedContextBuilder"/>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jndiBinder"/>
+        <property name="targetMethod" value="bind"/>
+        <property name="arguments">
+            <array>
+                <value type="java.lang.String">java:comp/MyBean</value>
+                <ref bean="myBean"/>
+            </array>
+        </property>
+    </bean>
+
+    <jee:jndi-lookup id="myBean2" jndi-name="java:comp/MyBean"/>
+
+    <bean class="org.diosoft.spring.jndi.JndiMyBeanChecker" init-method="init">
+        <constructor-arg ref="myBean2"/>
+    </bean>
+
+</beans>

@@ -1,13 +1,22 @@
 package org.diosoft.spring;
 
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.Set;
 
 import static java.lang.Thread.sleep;
 
 public class HelloService {
+    public final static String SERVICE_NAME = "Hello Service";
+
     private final Set<String> values;
     private int count;
+
+    private Properties prop;
+
+    public void setProp(Properties prop) {
+        this.prop = prop;
+    }
 
     public HelloService(Set<String> values) {
         this.values = values;
