@@ -1,8 +1,10 @@
 package org.diosoft.spring.conditional;
 
-public class MyBean2 {
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
-    public MyBean2() {
-        System.out.println("MyBean2");
-    }
+@Component
+@Primary
+public class MyBean2 implements CommonBean {
+
 }

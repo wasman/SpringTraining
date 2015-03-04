@@ -1,9 +1,8 @@
 package org.diosoft.spring.conditional;
 
-public class MyBean {
+import org.springframework.stereotype.Component;
 
-    public MyBean() {
-        System.out.println("MyBean");
+@Component
+public class MyBean implements CommonBean {
 
-    }
 }
