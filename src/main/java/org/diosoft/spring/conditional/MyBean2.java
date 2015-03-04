@@ -1,10 +1,11 @@
 package org.diosoft.spring.conditional;
 
-import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
-@Primary
+@Component()
+@Qualifier("secondBean")
+@BeanXL
 public class MyBean2 implements CommonBean {
 
 }

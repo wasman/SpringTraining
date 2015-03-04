@@ -17,9 +17,9 @@
     <context:component-scan base-package="org.diosoft.spring.conditional"/>
 
 
-    <bean id="qaMyBean" class="org.diosoft.spring.conditional.MyBean"/>
+    <!--<bean id="qaMyBean" class="org.diosoft.spring.conditional.MyBean"/>-->
 
-    <bean id="qaMyBean2" class="org.diosoft.spring.conditional.MyBean2"/>
+    <!--<bean id="qaMyBean2" class="org.diosoft.spring.conditional.MyBean2"/>-->
 
 
 </beans>
