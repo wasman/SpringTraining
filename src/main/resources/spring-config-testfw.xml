@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <alias name="helloService" alias="helloServiceAlias1"/>
+    <alias name="helloService" alias="helloServiceAlias2"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="spring-training.properties"/>
+    </bean>
+
+    <bean id="myBeanForProperties" class="org.diosoft.spring.testfw.MyBean">
+        <constructor-arg value="${prop.value1}"/>
+        <constructor-arg value="${prop.value2}"/>
+    </bean>
+
+
+
+</beans>
