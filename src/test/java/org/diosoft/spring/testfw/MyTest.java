@@ -14,14 +14,16 @@ import org.springframework.test.context.web.ServletTestExecutionListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/spring-config-testfw.xml")
-@TestExecutionListeners({
+@TestExecutionListeners(listeners = {
     MyCustomTestExecutionListener.class,
     ServletTestExecutionListener.class,
     DependencyInjectionTestExecutionListener.class,
     DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class,
     SqlScriptsTestExecutionListener.class
-})
+},
+        mergeMode = TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS
+)
 public class MyTest {
 
 
